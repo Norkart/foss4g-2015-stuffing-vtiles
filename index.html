@@ -1,0 +1,650 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Stuffing your vector tiles full of data</title>
+  <style type="text/css">
+    @import url(http://fonts.googleapis.com/css?family=Lato:300);
+.nklogo {
+  bottom: 1%;
+  max-width: 50%;
+  position: absolute;
+  right: 1%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: #f2f2f2;
+  background: linear-gradient(45deg, #2e2d30, rgb(75, 75, 77));
+  font-size: 100%;
+}
+
+p {
+  height: 90%;
+  width: auto;
+}
+
+.slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+}
+
+.slide-content {
+  font-size: 250%;
+  font-weight: 200;
+  height: 90%;
+  line-height: 1.375;
+  margin: auto;
+  overflow: visible;
+  padding: 0;
+  width: 90%;
+}
+
+.slide-content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0; height: 0;
+  border: 30px solid #333;
+  float: left;
+  margin-right: 30px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+
+  border-left-width: 50px;
+  border-right-width: 0;
+}
+
+.prev:hover {
+  border-right-color: #888;
+  cursor: pointer;
+}
+
+.next:hover {
+  border-left-color: #888;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 150%;
+  line-height: 1.2;
+  text-align: center;
+}
+
+h2 {
+  font-size: 100%;
+  line-height: 1.2;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 140%;
+  line-height: 1.2;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  line-height: 1.375;
+}
+
+.author h1 {
+  font-size: 170%;
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 95%;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(163, 194, 65);
+}
+
+a:hover {
+  color: rgb(163, 194, 65);
+}
+
+pre {
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background-color: rgb(163, 194, 65);
+
+  -webkit-transition: width 0.05s ease-out;
+  -moz-transition: width 0.05s ease-out;
+  -o-transition: width 0.05s ease-out;
+  transition: width 0.05s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+
+  body {
+    font-size: 70%;
+  }
+
+  .slide-content {
+    width: auto;
+  }
+
+  h1 {
+    margin-top: 120px;
+  }
+
+  .prev, .prev:hover {
+    border-right-color: rgba(135, 135, 135, 0.5);
+  }
+
+  .next, .next:hover {
+    border-left-color: rgba(135, 135, 135, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 50%;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    padding: 10px;
+    margin-top: 10px;
+    height: 340px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+
+  @page {
+    size: letter;
+  }
+
+  .hidden {
+    display: inline;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body {
+    margin: 0 auto !important;
+    border: 0;
+    padding: 0;
+    float: none !important;
+    overflow: visible;
+    background: none !important;
+    font-size: 52%;
+  }
+
+  .progress, .controls {
+    display: none;
+  }
+
+  .slide {
+    position: static;
+  }
+
+  .slide-content {
+    border: 1px solid #222;
+    margin-top: 0;
+    margin-bottom: 40px;
+    height: 3.5in;
+    overflow: visible;
+  }
+
+  .slide:nth-child(even) {
+    /* 2 slides per page */
+    page-break-before: always;
+  }
+}
+
+  </style>
+</head>
+<body>
+    <div class="slide " id="slide-1">
+    <section class="slide-content"><h1 id="stuffing-your-vector-tiles-full-of-data">Stuffing your vector tiles full of data</h1>
+<p>We do it so that you <s>don&#39;t have to</s> can do it too!</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-2">
+    <section class="slide-content"><h1 id="mapbox-vector-tiles-in-a-minute-if-you-know-a-bit-already-">Mapbox vector tiles in a minute (If you know a bit already)</h1>
+<ul>
+<li>Vector data smartly compressed into tiles.</li>
+<li>Designed by Mapbox, adopted by many others.</li>
+<li>Promises a lot of nice interactivity clientside &amp; reduced data transmission</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  " id="slide-3">
+    <section class="slide-content"><h1 id="norwegian-maps-in-a-minute-or-maybe-three-">Norwegian maps in a minute (or maybe three)</h1>
+<ul>
+<li>Interesting geography</li>
+<li>The Norwegian Mapping Authority collects a lot of data</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-4">
+    <section class="slide-content"><h1 id="-i-got-an-award-for-norway-">&quot;I got an award for Norway&quot;</h1>
+<p><img src="Geirangerfjord.jpg" alt="Fjord">
+&quot;Geirangerfjord (6-2007)&quot; by I, Fgmedia. Licensed under CC BY 2.5 via Wikimedia Commons</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-5">
+    <section class="slide-content"><h1 id="far-far-away">Far, far away</h1>
+<p><img src="hoth_luke.jpeg" alt="Hoth">
+&quot;Star Wars Episode V&quot; - Fair use</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-6">
+    <section class="slide-content"><h1 id="seoul-gives-us-an-inferiority-complex">Seoul gives us an inferiority complex</h1>
+<p><img src="oslo_skyline.jpg" alt="Hoth">
+&quot;LHR-111019-29liten&quot; by Leif-Harald Ruud. Licensed under CC BY-SA 3.0 via Wikimedia Commons</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-7">
+    <section class="slide-content"><h1 id="modalen">Modalen</h1>
+<p><img src="Modalen_live.jpg" alt="Modalen">
+«Mo 2» av I, Efarestv. Licensed under CC BY-SA 3.0 via Wikimedia Commons</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-8">
+    <section class="slide-content"><h1 id="modalen-google-">Modalen (Google)</h1>
+<p><img src="Modalen_Google.PNG" alt="Modalen"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-9">
+    <section class="slide-content"><h1 id="modalen-osm-">Modalen (OSM)</h1>
+<p><img src="Modalen_OSM.PNG" alt="Modalen"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-10">
+    <section class="slide-content"><h1 id="modalen-norkart-">Modalen (Norkart)</h1>
+<p><img src="Modalen_WEBATLAS.PNG" alt="Modalen"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-11">
+    <section class="slide-content"><h1 id="modalen-up-close">Modalen up close</h1>
+<p><img src="Modalen_centre.PNG" alt="Modalen"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-12">
+    <section class="slide-content"><h1 id="a-lot-of-details-">A lot of details!</h1>
+<ul>
+<li>~450 layers in all</li>
+<li>Many only have data at high zoom levels</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-13">
+    <section class="slide-content"><h1 id="anyway-vector-tiles-">Anyway, vector tiles!</h1>
+<ul>
+<li>Data definition <ul>
+<li>What data to have available at each Z </li>
+</ul>
+</li>
+<li>Style definition<ul>
+<li>How to display the data available</li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-14">
+    <section class="slide-content"><h1 id="our-pipeline">Our pipeline</h1>
+<ul>
+<li>Data in PostGIS &amp; SLD files</li>
+<li>Create a Mapbox Studio YML &amp; Mapnik XML (data def)</li>
+<li>Tilelive.js to render into vector mbtiles</li>
+<li>Serve and style clientside (style def)</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-15">
+    <section class="slide-content"><h1 id="zoom-levels">Zoom levels</h1>
+<ul>
+<li>Vector tiles usually only go to Z16, then upscale</li>
+<li>We have lots of Z&gt;16 stuff</li>
+<li>Put it in Z16 and use style to reveal &gt;16</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-16">
+    <section class="slide-content"><h1 id="tile-size-limits">Tile size limits</h1>
+<ul>
+<li>500KB per tile is a hard limit</li>
+<li>Combined with everything in Z16 you have a challenge</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-17">
+    <section class="slide-content"><h1 id="never-use-select-">Never use <code>SELECT *</code></h1>
+<ul>
+<li>Usually <code>SELECT geom</code> is enough</li>
+<li>Only add the attributes you really need for styling</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-18">
+    <section class="slide-content"><h1 id="generalisation-choices">Generalisation choices</h1>
+<ul>
+<li>Mapbox likes Tippecanoe</li>
+<li>We had a database with data generalised for different scales<ul>
+<li>Handcrafted and in use in our raster maps</li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-19">
+    <section class="slide-content"><h1 id="keep-the-originals-">Keep the originals!</h1>
+<p>Think of vector tiles as lossy compression for display rather than a data format.</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-20">
+    <section class="slide-content"><h1 id="the-spec-vs-best-general-practice">The spec vs. best/general practice</h1>
+<ul>
+<li>Z16 and 500 KB limits are not in the spec!</li>
+<li>Mapbox just configures all their stuff like that</li>
+<li>Why fight against it?</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-21">
+    <section class="slide-content"><h1 id="making-mapbox-studio-beg-for-mercy">Making Mapbox Studio beg for mercy</h1>
+<ul>
+<li>Wanted to inspect in MBS, but:</li>
+<li>Opening projects with 200+ layers takes a <em>long</em> time, 450 layers is instacrash</li>
+<li>We created mapnik xmls and generated vector mbtiles directly with tilelive, then used them as source in MBS to inspect</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-22">
+    <section class="slide-content"><h1 id="mbtiles-generation-times">MBTiles Generation times</h1>
+<ul>
+<li>Not magically faster than raster tiles (same amount of work)</li>
+<li>SSDs help a lot!</li>
+<li>Test scanline vs. pyramid strategies for your bbox!</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-23">
+    <section class="slide-content"><h1 id="file-sizes">File sizes</h1>
+<ul>
+<li>Magically smaller than raster tiles!<ul>
+<li>From X TB to XXX GB</li>
+</ul>
+</li>
+<li>The big trick is limiting it to Z16<ul>
+<li>Generating Z16 takes more time and space than the first 15 combined</li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-24">
+    <section class="slide-content"><h1 id="converting-styles-from-sld">Converting styles from SLD</h1>
+<ul>
+<li>Mapbox says to create GL styles from scratch</li>
+<li>We didn&#39;t listen, deployed the power of summer interns</li>
+<li>Machine-converted styles make for good starting point, need a lot of tweaking<ul>
+<li>Redundant data that used to be painted over</li>
+<li>Rendering order</li>
+<li>Seperate style rules for the same geometry (differing in zoom)</li>
+</ul>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-25">
+    <section class="slide-content"><h1 id="original-raster-">Original (raster)</h1>
+<p> <img src="sandvika_raster.PNG" alt="Sandvika_raster"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-26">
+    <section class="slide-content"><h1 id="results-mapboxgl-js-">Results (MapboxGL JS)</h1>
+<p> <img src="sandvika_vtiles.PNG" alt="Sandvika_vtiles"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-27">
+    <section class="slide-content"><h1 id="results-mapbox-gl-native-android-">Results (Mapbox GL Native - Android)</h1>
+<p> <img src="sandvika_android.png" alt="Sandvika_android"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-28">
+    <section class="slide-content"><div class="author">
+  <h1 class="name">Robert Nordan</h1>
+    <h3 class="twitter">
+      <a href="http://twitter.com/@robpvn">@robpvn</a>
+    </h3>
+    <h3 class="url">
+      <a href="https://github.com/Norkart">https://github.com/Norkart</a>
+    </h3>
+</div>
+</section>
+  </div>
+
+  <img class="nklogo" src="http://www.norkart.no/content/themes/norkart/assets/images/ident-white.svg"></img>
+
+  <script type="text/javascript">
+    /**
+ * Returns the current page number of the presentation.
+ */
+function currentPosition() {
+  return parseInt(document.querySelector('.slide:not(.hidden)').id.slice(6));
+}
+
+
+/**
+ * Navigates forward n pages
+ * If n is negative, we will navigate in reverse
+ */
+function navigate(n) {
+  var position = currentPosition();
+  var numSlides = document.getElementsByClassName('slide').length;
+
+  /* Positions are 1-indexed, so we need to add and subtract 1 */
+  var nextPosition = (position - 1 + n) % numSlides + 1;
+
+  /* Normalize nextPosition in-case of a negative modulo result */
+  nextPosition = (nextPosition - 1 + numSlides) % numSlides + 1;
+
+  document.getElementById('slide-' + position).classList.add('hidden');
+  document.getElementById('slide-' + nextPosition).classList.remove('hidden');
+
+  updateProgress();
+  updateURL();
+  updateTabIndex();
+}
+
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  window.history.replaceState({} , null, '#' + currentPosition());
+}
+
+
+/**
+ * Sets the progress indicator.
+ */
+function updateProgress() {
+  var progressBar = document.querySelector('.progress-bar');
+
+  if (progressBar !== null) {
+    var numSlides = document.getElementsByClassName('slide').length;
+    var position = currentPosition() - 1;
+    var percent = (numSlides === 1) ? 100 : 100 * position / (numSlides - 1);
+    progressBar.style.width = percent.toString() + '%';
+  }
+}
+
+
+/**
+ * Removes tabindex property from all links on the current slide, sets
+ * tabindex = -1 for all links on other slides. Prevents slides from appearing
+ * out of control.
+ */
+function updateTabIndex() {
+  var allLinks = document.querySelectorAll('.slide a');
+  var position = currentPosition();
+  var currentPageLinks = document.getElementById('slide-' + position).querySelectorAll('a');
+  var i;
+
+  for (i = 0; i < allLinks.length; i++) {
+    allLinks[i].setAttribute('tabindex', -1);
+  }
+
+  for (i = 0; i < currentPageLinks.length; i++) {
+    currentPageLinks[i].removeAttribute('tabindex');
+  }
+}
+
+/**
+ * Determines whether or not we are currently in full screen mode
+ */
+function isFullScreen() {
+  return document.fullscreenElement ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement ||
+         document.msFullscreenElement;
+}
+
+/**
+ * Toggle fullScreen mode on document element.
+ * Works on chrome (>= 15), firefox (>= 9), ie (>= 11), opera(>= 12.1), safari (>= 5).
+ */
+function toggleFullScreen() {
+  /* Convenient renames */
+  var docElem = document.documentElement;
+  var doc = document;
+
+  docElem.requestFullscreen =
+      docElem.requestFullscreen ||
+      docElem.msRequestFullscreen ||
+      docElem.mozRequestFullScreen ||
+      docElem.webkitRequestFullscreen.bind(docElem, Element.ALLOW_KEYBOARD_INPUT);
+
+  doc.exitFullscreen =
+      doc.exitFullscreen ||
+      doc.msExitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen;
+
+  isFullScreen() ? doc.exitFullscreen() : docElem.requestFullscreen();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Update the tabindex to prevent weird slide transitioning
+  updateTabIndex();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) {
+    navigate(parseInt(page) - 1);
+  }
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - FULLSCREEN
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+      navigate(-1);
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+      navigate(1);
+    } else if (kc === 13) {
+      toggleFullScreen();
+    }
+  };
+
+  if (document.querySelector('.next') && document.querySelector('.prev')) {
+    document.querySelector('.next').onclick = function (e) {
+      e.preventDefault();
+      navigate(1);
+    };
+
+    document.querySelector('.prev').onclick = function (e) {
+      e.preventDefault();
+      navigate(-1);
+    };
+  }
+});
+
+  </script>
+</body>
+</html>
