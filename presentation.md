@@ -154,6 +154,10 @@ Think of vector tiles as lossy compression for display rather than a data format
  ![Sandvika_vtiles](sandvika_vtiles.PNG)
  
 --
+#Results (MapboxGL JS)
+ ![Sandvika_close](sandvika_close.PNG)
+ 
+--
 #Results (Mapbox GL Native - Android)
  ![Sandvika_android](sandvika_android.png)
 

@@ -274,12 +274,12 @@ pre {
   </style>
 </head>
 <body>
-    <div class="slide " id="slide-1">
+    <div class="slide " id="slide-1">
     <section class="slide-content"><h1 id="stuffing-your-vector-tiles-full-of-data">Stuffing your vector tiles full of data</h1>
 <p>We do it so that you <s>don&#39;t have to</s> can do it too!</p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-2">
+  <div class="slide hidden " id="slide-2">
     <section class="slide-content"><h1 id="mapbox-vector-tiles-in-a-minute-if-you-know-a-bit-already-">Mapbox vector tiles in a minute (If you know a bit already)</h1>
 <ul>
 <li>Vector data smartly compressed into tiles.</li>
@@ -288,7 +288,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden  " id="slide-3">
+  <div class="slide hidden  " id="slide-3">
     <section class="slide-content"><h1 id="norwegian-maps-in-a-minute-or-maybe-three-">Norwegian maps in a minute (or maybe three)</h1>
 <ul>
 <li>Interesting geography</li>
@@ -296,51 +296,51 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-4">
+  <div class="slide hidden " id="slide-4">
     <section class="slide-content"><h1 id="-i-got-an-award-for-norway-">&quot;I got an award for Norway&quot;</h1>
 <p><img src="Geirangerfjord.jpg" alt="Fjord">
 &quot;Geirangerfjord (6-2007)&quot; by I, Fgmedia. Licensed under CC BY 2.5 via Wikimedia Commons</p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-5">
+  <div class="slide hidden " id="slide-5">
     <section class="slide-content"><h1 id="far-far-away">Far, far away</h1>
 <p><img src="hoth_luke.jpeg" alt="Hoth">
 &quot;Star Wars Episode V&quot; - Fair use</p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-6">
+  <div class="slide hidden " id="slide-6">
     <section class="slide-content"><h1 id="seoul-gives-us-an-inferiority-complex">Seoul gives us an inferiority complex</h1>
 <p><img src="oslo_skyline.jpg" alt="Hoth">
 &quot;LHR-111019-29liten&quot; by Leif-Harald Ruud. Licensed under CC BY-SA 3.0 via Wikimedia Commons</p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-7">
+  <div class="slide hidden " id="slide-7">
     <section class="slide-content"><h1 id="modalen">Modalen</h1>
 <p><img src="Modalen_live.jpg" alt="Modalen">
 «Mo 2» av I, Efarestv. Licensed under CC BY-SA 3.0 via Wikimedia Commons</p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-8">
+  <div class="slide hidden " id="slide-8">
     <section class="slide-content"><h1 id="modalen-google-">Modalen (Google)</h1>
 <p><img src="Modalen_Google.PNG" alt="Modalen"></p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-9">
+  <div class="slide hidden " id="slide-9">
     <section class="slide-content"><h1 id="modalen-osm-">Modalen (OSM)</h1>
 <p><img src="Modalen_OSM.PNG" alt="Modalen"></p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-10">
+  <div class="slide hidden " id="slide-10">
     <section class="slide-content"><h1 id="modalen-norkart-">Modalen (Norkart)</h1>
 <p><img src="Modalen_WEBATLAS.PNG" alt="Modalen"></p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-11">
+  <div class="slide hidden " id="slide-11">
     <section class="slide-content"><h1 id="modalen-up-close">Modalen up close</h1>
 <p><img src="Modalen_centre.PNG" alt="Modalen"></p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-12">
+  <div class="slide hidden " id="slide-12">
     <section class="slide-content"><h1 id="a-lot-of-details-">A lot of details!</h1>
 <ul>
 <li>~450 layers in all</li>
@@ -348,7 +348,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-13">
+  <div class="slide hidden " id="slide-13">
     <section class="slide-content"><h1 id="anyway-vector-tiles-">Anyway, vector tiles!</h1>
 <ul>
 <li>Data definition <ul>
@@ -362,7 +362,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-14">
+  <div class="slide hidden " id="slide-14">
     <section class="slide-content"><h1 id="our-pipeline">Our pipeline</h1>
 <ul>
 <li>Data in PostGIS &amp; SLD files</li>
@@ -373,7 +373,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-15">
+  <div class="slide hidden " id="slide-15">
     <section class="slide-content"><h1 id="zoom-levels">Zoom levels</h1>
 <ul>
 <li>Vector tiles usually only go to Z16, then overzoom</li>
@@ -382,7 +382,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-16">
+  <div class="slide hidden " id="slide-16">
     <section class="slide-content"><h1 id="tile-size-limits">Tile size limits</h1>
 <ul>
 <li>500KB per tile is a hard limit</li>
@@ -390,7 +390,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-17">
+  <div class="slide hidden " id="slide-17">
     <section class="slide-content"><h1 id="never-use-select-">Never use <code>SELECT *</code></h1>
 <ul>
 <li>Usually <code>SELECT geom</code> is enough</li>
@@ -398,7 +398,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-18">
+  <div class="slide hidden " id="slide-18">
     <section class="slide-content"><h1 id="generalisation-choices">Generalisation choices</h1>
 <ul>
 <li>Mapbox likes Tippecanoe</li>
@@ -409,12 +409,12 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-19">
+  <div class="slide hidden " id="slide-19">
     <section class="slide-content"><h1 id="keep-the-originals-">Keep the originals!</h1>
 <p>Think of vector tiles as lossy compression for display rather than a data format.</p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-20">
+  <div class="slide hidden " id="slide-20">
     <section class="slide-content"><h1 id="the-spec-vs-best-general-practice">The spec vs. best/general practice</h1>
 <ul>
 <li>Z16 and 500 KB limits are not in the spec!</li>
@@ -423,7 +423,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-21">
+  <div class="slide hidden " id="slide-21">
     <section class="slide-content"><h1 id="making-mapbox-studio-beg-for-mercy">Making Mapbox Studio beg for mercy</h1>
 <ul>
 <li>Wanted to inspect in MBS, but:</li>
@@ -432,8 +432,8 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-22">
-    <section class="slide-content"><h1 id="mbtiles-generation-times">Generation times</h1>
+  <div class="slide hidden " id="slide-22">
+    <section class="slide-content"><h1 id="generation-times">Generation times</h1>
 <ul>
 <li>Not magically faster than raster tiles (same amount of work)</li>
 <li>SSDs help a lot!</li>
@@ -441,7 +441,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-23">
+  <div class="slide hidden " id="slide-23">
     <section class="slide-content"><h1 id="file-sizes">File sizes</h1>
 <ul>
 <li>Magically smaller than raster tiles!<ul>
@@ -455,7 +455,7 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-24">
+  <div class="slide hidden " id="slide-24">
     <section class="slide-content"><h1 id="converting-styles-from-sld">Converting styles from SLD</h1>
 <ul>
 <li>Mapbox says to create GL styles from scratch</li>
@@ -469,22 +469,27 @@ pre {
 </ul>
 </section>
   </div>
-  <div class="slide hidden " id="slide-25">
+  <div class="slide hidden " id="slide-25">
     <section class="slide-content"><h1 id="original-raster-">Original (raster)</h1>
 <p> <img src="sandvika_raster.PNG" alt="Sandvika_raster"></p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-26">
+  <div class="slide hidden " id="slide-26">
     <section class="slide-content"><h1 id="results-mapboxgl-js-">Results (MapboxGL JS)</h1>
 <p> <img src="sandvika_vtiles.PNG" alt="Sandvika_vtiles"></p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-27">
+  <div class="slide hidden " id="slide-27">
+    <section class="slide-content"><h1 id="results-mapboxgl-js-">Results (MapboxGL JS)</h1>
+<p> <img src="sandvika_close.PNG" alt="Sandvika_close"></p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-28">
     <section class="slide-content"><h1 id="results-mapbox-gl-native-android-">Results (Mapbox GL Native - Android)</h1>
 <p> <img src="sandvika_android.png" alt="Sandvika_android"></p>
 </section>
   </div>
-  <div class="slide hidden " id="slide-28">
+  <div class="slide hidden " id="slide-29">
     <section class="slide-content"><div class="author">
   <h1 class="name">Robert Nordan</h1>
     <h3 class="twitter">
