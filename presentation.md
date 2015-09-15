@@ -72,6 +72,7 @@ We do it so that you <s>don't have to</s> can do it too!
 #Our pipeline
 
  - Data in PostGIS & SLD files
+ - Use SLD as source
  - Create a Mapbox Studio YML & Mapnik XML (data def)
  - Tilelive.js to render into vector mbtiles
  - Serve and style clientside (style def)
