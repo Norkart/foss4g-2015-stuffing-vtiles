@@ -79,7 +79,7 @@ We do it so that you <s>don't have to</s> can do it too!
 --
 #Zoom levels
 
- - Vector tiles usually only go to Z16, then upscale
+ - Vector tiles usually only go to Z16, then overzoom
  - We have lots of Z>16 stuff
  - Put it in Z16 and use style to reveal >16
  
@@ -122,7 +122,7 @@ Think of vector tiles as lossy compression for display rather than a data format
  - We created mapnik xmls and generated vector mbtiles directly with tilelive, then used them as source in MBS to inspect
 
 --
-#MBTiles Generation times
+#Generation times
 
  - Not magically faster than raster tiles (same amount of work)
  - SSDs help a lot!
