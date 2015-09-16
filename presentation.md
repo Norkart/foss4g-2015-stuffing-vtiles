@@ -162,6 +162,6 @@ Think of vector tiles as lossy compression for display rather than a data format
  ![Sandvika_android](sandvika_android.png)
  
 --
-#Results (Mapbox GL Native - Android)
+#Results (Live?)
  [Special bonus!](http://norkart.github.io/foss4g-2015-stuffing-vtiles/example.html)
 
